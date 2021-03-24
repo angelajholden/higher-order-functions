@@ -1,147 +1,32 @@
-// JavaScript Higher Order Functions
+const practiceareas = { "Administrative Law": 4, "Alternative Dispute Resolution": 2, "Animal Law": 2, "Antitrust Litigation": 1, Appellate: 1, "Aviation and Aerospace": 1, Banking: 1, Bankruptcy: 0, "Business Litigation": 1, "Business/Corporate": 4, "Cannabis Law": 3, "Civil Litigation": 6, "Civil Rights": 3, "Class Action/Mass Torts": 5, "Closely Held Business": 0, Communications: 0, "Constitutional Law": 0, "Construction Litigation": 0, "Consumer Law": 0, "Creditor Debtor Rights": 1, "Criminal Defense": 6, "Criminal Defense: DUI/DWI": 0, "Criminal Defense: White Collar": 0, "Criminal Prosecution": 1, "E-Discovery": 1, "Elder Law": 1, "Eminent Domain": 0, "Employee Benefits": 0, "Employment & Labor": 0, "Employment Litigation": 1, "Energy & Natural Resources": 0, "Entertainment & Sports": 1, Enviornmental: 1, Environmental: 1, "Environmental Litigation": 0, "Estate & Trust Litigation": 0, "Estate Planning & Probate": 0, "Family Law": 0, "Food and Drugs": 1, "Franchise/Dealership": 0, Gaming: 1, "General Litigation": 2, "Government Contracts": 0, "Government Finance": 0, "Government Relations": 0, "Health Care": 0, Healthcare: 1, "Hobbit Law": 2, Immigration: 1, "Insurance Coverage": 0, "Intellectual Property": 0, "Intellectual Property Litigation": 0, International: 1, "Land Use/Zoning": 1, "Legal Aid/Pro Bono": 1, "Legislative & Governmental Affairs": 0, Lobbying: 0, "Media and Advertising": 0, "Mergers & Acquisitions": 0, "Military/Veterans Law": 0, "Native American Law": 0, "Nonprofit Organizations": 1, "Personal Injury - General": 1, "Personal Injury - Medical Malpractice": 0, "Personal Injury - Products": 0, "Professional Liability": 2, Prosecution: 2, "Real Estate": 0, "Schools & Education": 1, "Securities & Corporate Finance": 0, "Securities Litigation": 1, "Social Security Disability": 0, "State, Local & Municipal": 0, Surety: 1, Tax: 0, "Technology Transactions": 1, "The Blade": 1, Transformative: 1, "Transportation/Maritime": 0, Utilities: 1, "Workers' Compensation": 1 };
 
-const companies = [
-	{ name: "Company One", category: "Finance", start: 1981, end: 2003 },
-	{ name: "Company Two", category: "Retail", start: 1992, end: 2008 },
-	{ name: "Company Three", category: "Auto", start: 1999, end: 2007 },
-	{ name: "Company Four", category: "Retail", start: 1989, end: 2010 },
-	{ name: "Company Five", category: "Technology", start: 2009, end: 2014 },
-	{ name: "Company Six", category: "Finance", start: 1987, end: 2010 },
-	{ name: "Company Seven", category: "Auto", start: 1986, end: 1996 },
-	{ name: "Company Eight", category: "Technology", start: 2011, end: 2016 },
-	{ name: "Company Nine", category: "Retail", start: 1981, end: 1989 },
-];
+const areaKeyValue = Object.entries(practiceareas);
+const areaKeys = Object.keys(practiceareas);
+const firstLetter = areaKeys.map((x) => x[0]);
+const grouped = new Set(firstLetter.sort());
 
-const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
+// console.log(firstLetter);
+// console.log(grouped);
 
-// FOREACH
+let newArray = [];
 
-// Basic for loop
-// for (let i = 0; i < companies.length; i++) {
-// 	console.log(companies[i]);
-// }
+areaKeyValue.forEach(function (area) {
+	const firstWord = area[0].split("");
+	const keyLetter = firstWord[0];
+	console.log(keyLetter);
+});
 
-// forEach - result is same as the basic for loop
-// companies.forEach(function (company) {
-// 	console.log(company);
-// });
+grouped.forEach(function (group) {
+	let newObject = {};
+	newObject.letter = group;
+	newObject.list = [];
 
-// get the company name, etc.
-// companies.forEach(function (company) {
-// 	console.log(company.name);
-// });
-
-// FILTER
-
-// Basic for loop
-// let canDrink = [];
-// for (let i = 0; i < ages.length; i++) {
-// 	if (ages[i] >= 21) {
-// 		canDrink.push(ages[i]);
-// 	}
-// }
-
-// filter - result is the same
-// const canDrink = ages.filter(function (age) {
-// 	if (age >= 21) {
-// 		return true;
-// 	}
-// });
-
-// filter arrow function (es6)
-// const canDrink = ages.filter((age) => age >= 21);
-
-// filter retail companies
-// const retailCompanies = companies.filter(function (company) {
-// 	if (company.category === "Retail") {
-// 		return true;
-// 	}
-// });
-
-// (es6)
-// const retailCompanies = companies.filter((company) => company.category === "Retail");
-
-// 80s companies
-// const eightiesCompanies = companies.filter((company) => company.start >= 1980 && company.start < 1990);
-
-// Lasted 10 years or more
-// const lastedTenYears = companies.filter((company) => company.end - company.start >= 10);
-
-// MAP
-
-// create array of company names
-// const companyNames = companies.map(function (company) {
-// 	return company.name;
-// });
-
-// const testMap = companies.map(function (company) {
-// 	return `${company.name} [${company.start} to ${company.end}]`;
-// });
-
-// (es6)
-// const testMap = companies.map((company) => `${company.name} [started ${company.start} - ended ${company.end}]`);
-
-// get square root of ages
-// const agesSquare = ages.map((age) => Math.sqrt(age));
-
-// multiple ages x 2
-// const agesTimesTwo = ages.map((age) => age * 2);
-
-// get the square root, then multiply x 2
-// const ageMap = ages.map((age) => Math.sqrt(age)).map((age) => age * 2);
-
-// SORT
-
-//  sort companies by start year
-// const sortedCompanies = companies.sort(function (c1, c2) {
-// 	if (c1.start > c2.start) {
-// 		return 1;
-// 	} else {
-// 		return -1;
-// 	}
-// });
-
-// es6 sort companies by start year
-// const sortedCompanies = companies.sort((a, b) => (a.start > b.start ? 1 : -1));
-
-// sort ages ASC order
-// const sortAges = ages.sort((a, b) => a - b);
-
-// sort ages DESC order
-// const sortAges = ages.sort((a, b) => b - a);
-
-// REDUCE
-
-// add all ages together with basic for loop
-// let ageSum = 0;
-// for (let i = 0; i < ages.length; i++) {
-// 	ageSum += ages[i];
-// }
-
-// add ages using reduce
-// const ageSum = ages.reduce(function (total, age) {
-// 	return total + age;
-// }, 0);
-
-// es6 add ages using reduce
-// const ageSum = ages.reduce((total, age) => total + age, 0);
-
-// const totalYears = companies.reduce(function (total, company) {
-// 	return total + (company.end - company.start);
-// }, 0);
-
-// const totalYears = companies.reduce((total, company) => total + (company.end - company.start), 0);
-
-// COMBINED
-
-const combined = ages
-	// multiply ages x 2
-	.map((age) => age * 2)
-	// filter out anything under 40
-	.filter((age) => age >= 40)
-	// sort lowest to higest
-	.sort((a, b) => a - b)
-	// add them all up
-	.reduce((total, age) => total + age, 0);
-
-console.log(combined);
+	areaKeys.filter(function (items) {
+		if (items[0] === group) {
+			newObject.list.push(items);
+			return true;
+		}
+	});
+	newArray.push(newObject);
+});
+console.log(newArray);
